@@ -206,7 +206,7 @@
   /* ── CARDS ── */
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 24px;
   }
 
@@ -226,20 +226,20 @@
 
   .card-img {
     width: 100%;
-    height: 240px;
+    height: 180px;
     object-fit: cover;
   }
 
   .card-img-placeholder {
     width: 100%;
-    height: 240px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 3rem;
   }
 
-  .card-body { padding: 28px; }
+  .card-body { padding: 20px; }
 
   .card-tag {
     font-size: 0.7rem;
@@ -252,7 +252,7 @@
 
   .card-body h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
+    font-size: 1.15rem;
     color: var(--ocean);
     margin-bottom: 6px;
   }
@@ -282,9 +282,9 @@
     background: var(--ocean);
     color: var(--white);
     border: none;
-    padding: 14px 26px;
+    padding: 8px 18px;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
     font-family: 'Inter', sans-serif;
@@ -302,7 +302,7 @@
     z-index: 200;
     align-items: center;
     justify-content: center;
-    padding: 28px;
+    padding: 20px;
   }
 
   .modal-overlay.open { display: flex; }
@@ -340,7 +340,7 @@
 
   .form-group label {
     display: block;
-    font-size: 1rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--dark);
     margin-bottom: 6px;
@@ -471,7 +471,7 @@
     margin-bottom: 4px;
   }
 
-  .booking-info p { font-size: 1rem; color: var(--gray); line-height: 1.6; }
+  .booking-info p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
 
   .booking-status {
     padding: 6px 14px;
@@ -1214,61 +1214,20 @@ function showToast(msg, type) {
 </script>
 
 </div>
- <section style="padding:60px 20px;background:#f9f7f4;">
-  <h2 style="text-align:center;color:#0D3B5E;">Destinos Internacionales</h2>
-  <p style="text-align:center;color:#6B7280;">Explora los mejores tours del mundo</p>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;max-width:1400px;margin:40px auto;">
-
-    <a href="https://gyg.me/ZaBqhn4" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇨🇱 Puerto Varas</h3>
-      <p>Tours y experiencias en Puerto Varas.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/BqG1atTp" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇦🇷 Buenos Aires</h3>
-      <p>Tours y experiencias en Buenos Aires.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/d0GLpeT4" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇧🇷 Río de Janeiro</h3>
-      <p>Tours y experiencias en Río de Janeiro.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/fIvmbpX2" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇲🇽 Cancún</h3>
-      <p>Tours y experiencias en Cancún.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/AXNZuZee" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇺🇸 Nueva York</h3>
-      <p>Tours y experiencias en Nueva York.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/kXGRcc7c" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇪🇸 Barcelona</h3>
-      <p>Tours y experiencias en Barcelona.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/MTvafoij" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇲🇨 Mónaco</h3>
-      <p>Tours y experiencias en Mónaco.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-
-    <a href="https://gyg.me/4O0zuaJq" target="_blank" style="text-decoration:none;background:#fff;padding:30px;border-radius:22px;box-shadow:0 10px 30px rgba(0,0,0,.15);">
-      <h3>🇮🇹 Roma</h3>
-      <p>Tours y experiencias en Roma.</p>
-      <strong>Ver tours disponibles →</strong>
-    </a>
-</div>
-</section>
+ 
+<section style="padding:60px 20px;background:#f9f7f4;">
+<h2 style="text-align:center;color:#0D3B5E;">Destinos Internacionales</h2>
+<p style="text-align:center;color:#6B7280;">Explora los mejores tours del mundo</p>
+<style>
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1300px;margin:40px auto}
+.cardx{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.15);text-decoration:none;color:#222}
+.cardx img{width:100%;height:220px;object-fit:cover}
+.cardx div{padding:18px}
+.cardx h3{margin:0 0 8px;color:#0D3B5E}
+.btn{display:inline-block;margin-top:10px;background:#0D3B5E;color:#fff;padding:10px 16px;border-radius:8px}
+</style>
+<div class="grid">
+<a class="cardx" href="https://gyg.me/ZaBqhn4" target="_blank"><img src="https://picsum.photos/seed/puertovaras/800/500"><div><h3>Puerto Varas</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/BqG1atTp" target="_blank"><img src="https://picsum.photos/seed/baires/800/500"><div><h3>Buenos Aires</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/d0GLpeT4" target="_blank"><img src="https://picsum.photos/seed/rio/800/500"><div><h3>Río de Janeiro</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/fIvmbpX2" target="_blank"><img src="https://picsum.photos/seed/cancun/800/500"><div><h3>Cancún</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/AXNZuZee" target="_blank"><img src="https://picsum.photos/seed/ny/800/500"><div><h3>Nueva York</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/kXGRcc7c" target="_blank"><img src="https://picsum.photos/seed/barcelona/800/500"><div><h3>Barcelona</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/MTvafoij" target="_blank"><img src="https://picsum.photos/seed/monaco/800/500"><div><h3>Mónaco</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/4O0zuaJq" target="_blank"><img src="https://picsum.photos/seed/roma/800/500"><div><h3>Roma</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a></div></section>
 </body>
 </html>
   
