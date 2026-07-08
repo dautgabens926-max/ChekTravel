@@ -1,16 +1,4 @@
-🌍✈️ ¡Tu próxima aventura comienza con ChekTravel!
-
-¿Buscas el mejor precio para tus vacaciones? En ChekTravel encuentras hoteles, vuelos, tours y actividades en un solo lugar.
-
-🔥 Ofertas exclusivas.
-🏨 Hoteles para todos los presupuestos.
-✈️ Vuelos a destinos nacionales e internacionales.
-🎟️ Tours inolvidables y experiencias únicas.
-
-Reserva hoy y empieza a crear recuerdos que durarán toda la vida.
-
-👉 Visita ChekTravel y encuentra la mejor oferta para tu próximo viaje.
-🌎 ¡Viaja más, gasta menos!<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="es">
 <head><script async="" data-gyg-partner-id="XXWGYEX" defer="" src="https://widget.getyourguide.com/dist/pa.umd.production.min.js">
@@ -662,6 +650,11 @@ background-position:center!important;
 .offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
 .offer-card{background:#f6f8fb;border-radius:12px;padding:18px;text-align:center}
 .offer-card h3{color:#0D3B5E}
+
+.why-box{max-width:1100px;margin:40px auto;padding:35px;background:#0D3B5E;color:#fff;border-radius:18px}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;text-align:center}
+.why-item{padding:15px}
+.why-item h3{margin:10px 0}
 </style>
 <script data-cfasync="false" data-no-defer="1" data-noptimize="1" data-wpfc-render="false" nowprocket="" seraph-accel-crit="1">
   (function () {
@@ -672,7 +665,7 @@ background-position:center!important;
   })();
 </script>
 </head>
-<body>
+<body id="top">
 <!-- NAV -->
 <nav>
 <div class="nav-brand">Chek<span>Travel</span></div>
@@ -713,15 +706,24 @@ background-position:center!important;
 <p class="section-sub">Los lugares más reservados de la temporada</p>
 <div class="cards" id="featuredCards"></div>
 </div>
-
 <section class="offer-box">
 <h2 style="text-align:center;color:#0D3B5E">🔥 Ofertas destacadas</h2>
 <p style="text-align:center">Reserva con nuestros socios y encuentra promociones exclusivas.</p>
 <div class="offer-grid">
-<div class="offer-card"><h3>🏨 Hoteles</h3><p>Las mejores tarifas.</p></div>
-<div class="offer-card"><h3>✈️ Vuelos</h3><p>Compara cientos de rutas.</p></div>
-<div class="offer-card"><h3>🎟️ Tours</h3><p>Experiencias inolvidables.</p></div>
-<div class="offer-card"><h3>🛡️ Viaja seguro</h3><p>Reserva con confianza.</p></div>
+<a href="https://www.tkqlhce.com/click-101809270-13379262" style="display:block;color:inherit;text-decoration:none" target="_blank"><div class="offer-card"><h3>🏨 Hoteles</h3><p>Las mejores tarifas.</p></div></a>
+<a href="#featuredCards" style="display:block;color:inherit;text-decoration:none"><div class="offer-card"><h3>✈️ Vuelos</h3><p>Compara cientos de rutas.</p></div></a>
+<a href="https://gyg.me/ZaBqhn4" style="display:block;color:inherit;text-decoration:none" target="_blank"><div class="offer-card"><h3>🎟️ Tours</h3><p>Experiencias inolvidables.</p></div></a>
+<a href="https://kkday.tpk.lv/2QltoggV" style="display:block;color:inherit;text-decoration:none" target="_blank"><div class="offer-card"><h3>🛡️ Viaja seguro</h3><p>Reserva con confianza.</p></div></a>
+</div>
+</section>
+
+<section class="why-box">
+<h2 style="text-align:center">⭐ ¿Por qué elegir ChekTravel?</h2>
+<div class="why-grid">
+<a href="https://www.tkqlhce.com/click-101809270-13379262" target="_blank" style="color:white;text-decoration:none"><div class="why-item"><div style="font-size:38px">💰</div><h3>Mejores precios</h3><p>Compara ofertas de nuestros socios.</p></div></a>
+<a href="https://kkday.tpk.lv/2QltoggV" target="_blank" style="color:white;text-decoration:none"><div class="why-item"><div style="font-size:38px">🔒</div><h3>Reserva segura</h3><p>Reserva con plataformas reconocidas.</p></div></a>
+<a href="javascript:void(0)" onclick="document.getElementById('destinos-internacionales').scrollIntoView({behavior:'smooth'});" style="color:white;text-decoration:none"><div class="why-item"><div style="font-size:38px">🌍</div><h3>Destinos mundiales</h3><p>Hoteles, vuelos y actividades.</p></div></a>
+<a href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="color:white;text-decoration:none"><div class="why-item"><div style="font-size:38px">📱</div><h3>Fácil de usar</h3><p>Optimizado para móviles.</p></div></a>
 </div>
 </section>
 </div>
@@ -923,7 +925,11 @@ function handleLogout() {
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
+  const page=document.getElementById('page-'+name);
+  if(page) page.classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    if((btn.getAttribute('onclick')||'').includes("showPage('"+name+"'")) btn.classList.add('active');
+  });
   if (name === 'mybookings') loadMyBookings();
   if (name === 'admin') loadAdminBookings();
 }
@@ -1246,7 +1252,7 @@ function showToast(msg, type) {
 }
 
 </script>
-<section style="padding:60px 20px;background:#f9f7f4;">
+<section id="destinos-internacionales" style="padding:60px 20px;background:#f9f7f4;">
 <h2 style="text-align:center;color:#0D3B5E;">Destinos Internacionales</h2>
 <p style="text-align:center;color:#6B7280;">Explora los mejores tours del mundo</p>
 <style>
