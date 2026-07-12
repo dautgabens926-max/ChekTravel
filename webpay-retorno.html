@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultado del pago — ChekTravel</title>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#F9F7F4; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; padding:24px; }
+  .box { background:#fff; border-radius:20px; padding:40px 32px; max-width:420px; text-align:center; box-shadow:0 12px 32px rgba(0,0,0,.12); }
+  .icon { font-size:3.5rem; margin-bottom:16px; }
+  h1 { color:#0D3B5E; font-size:1.4rem; margin-bottom:10px; }
+  p { color:#6B7280; font-size:0.95rem; line-height:1.5; margin-bottom:24px; }
+  a.btn { display:inline-block; background:#0D3B5E; color:#fff; padding:13px 26px; border-radius:10px; text-decoration:none; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="box">
+  <div id="icon" class="icon">⏳</div>
+  <h1 id="titulo">Procesando...</h1>
+  <p id="mensaje">Un momento por favor.</p>
+  <a class="btn" href="/">Volver a ChekTravel</a>
+</div>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const ok = params.get('ok');
+  const reserva = params.get('reserva');
+  const motivo = params.get('motivo');
+
+  const icon = document.getElementById('icon');
+  const titulo = document.getElementById('titulo');
+  const mensaje = document.getElementById('mensaje');
+
+  if (ok === '1') {
+    icon.textContent = '✅';
+    titulo.textContent = '¡Pago exitoso!';
+    mensaje.textContent = 'Tu reserva ' + (reserva || '') + ' fue confirmada y pagada. Te contactaremos pronto.';
+  } else if (motivo === 'cancelado') {
+    icon.textContent = '🚫';
+    titulo.textContent = 'Pago cancelado';
+    mensaje.textContent = 'Cancelaste el proceso de pago. Tu reserva sigue pendiente, puedes intentar de nuevo desde Mis Reservas.';
+  } else {
+    icon.textContent = '❌';
+    titulo.textContent = 'Pago no completado';
+    mensaje.textContent = 'No pudimos confirmar el pago. Tu reserva sigue pendiente, intenta nuevamente o contáctanos.';
+  }
+</script>
+</body>
+</html>
