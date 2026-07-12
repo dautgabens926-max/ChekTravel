@@ -640,10 +640,54 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* ── NAV MOBILE (hamburguesa) ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+
   /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
+    .nav-toggle { display: block; }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: var(--ocean);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 8px 16px 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links .nav-btn,
+    .nav-links .nav-btn.cta {
+      width: 100%;
+      text-align: left;
+      padding: 12px 10px;
+      font-size: 0.95rem;
+    }
+
+    .nav-links .user-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 10px;
+    }
+
     .nav-brand { font-size: 1.1rem; }
-    .nav-btn { padding: 6px 10px; font-size: 0.8rem; }
     .hero { padding: 60px 16px 80px; }
     .booking-card { flex-direction: column; align-items: flex-start; }
     .form-row { grid-template-columns: 1fr; }
@@ -665,7 +709,7 @@ background-position:center!important;
 .why-item{padding:15px}
 .why-item h3{margin:10px 0}
 </style>
-<script data-cfasync="false" data-no-defer="1" data-noptimize="1" data-wpfc-render="false" nowprocket="" seraph-accel-crit="1">
+<script>
   (function () {
       var script = document.createElement("script");
       script.async = 1;
@@ -678,16 +722,17 @@ background-position:center!important;
 <!-- NAV -->
 <nav>
 <div class="nav-brand">Chek<span>Travel</span></div>
-<div class="nav-links">
-<button class="nav-btn active" onclick="showPage('home')">Inicio</button>
-<button class="nav-btn" onclick="showPage('destinations')">Destinos</button>
-<button class="nav-btn" id="nav-bookings" onclick="showPage('mybookings')" style="display:none">Mis Reservas</button>
+<button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Abrir menú">☰</button>
+<div class="nav-links" id="navLinks">
+<button class="nav-btn active" onclick="showPage('home');closeNav()">Inicio</button>
+<button class="nav-btn" onclick="showPage('destinations');closeNav()">Destinos</button>
+<button class="nav-btn" id="nav-bookings" onclick="showPage('mybookings');closeNav()" style="display:none">Mis Reservas</button>
 <div class="user-info" id="userInfo" style="display:none">
 <span id="userEmail"></span>
-<button class="nav-btn" onclick="logout()">Salir</button>
+<button class="nav-btn" onclick="logout();closeNav()">Salir</button>
 </div>
-<button class="nav-btn cta" id="nav-login" onclick="openModal('loginModal')">Iniciar Sesión</button>
-<button class="nav-btn" id="nav-admin" onclick="showPage('admin')" style="display:none">Admin</button>
+<button class="nav-btn cta" id="nav-login" onclick="openModal('loginModal');closeNav()">Iniciar Sesión</button>
+<button class="nav-btn" id="nav-admin" onclick="showPage('admin');closeNav()" style="display:none">Admin</button>
 </div>
 </nav>
 <!-- ══ PAGE: HOME ══ -->
@@ -928,6 +973,14 @@ function handleLogout() {
   document.getElementById('nav-login').style.display = 'inline-block';
   document.getElementById('nav-bookings').style.display = 'none';
   document.getElementById('nav-admin').style.display = 'none';
+}
+
+// ── NAV MOBILE ──
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
 }
 
 // ── PAGES ──
