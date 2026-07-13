@@ -908,7 +908,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const WEBPAY_CREATE_URL = 'https://xgkclwjxdwfzbekihwiq.functions.supabase.co/webpay-create';
+const WEBPAY_CREATE_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co/functions/v1/webpay-create';
 
 const DESTINATIONS = [
   { id: 1, name: 'Puerto Varas', region: 'Los Lagos', type: 'Cabaña', desc: 'Junto al lago Llanquihue con vista al volcán Osorno.', price: 89000, emoji: '🏔️', gradient: 'linear-gradient(135deg,#1A6B9A,#2A9D8F)' },
