@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head><script async="" data-gyg-partner-id="XXWGYEX" defer="" src="https://widget.getyourguide.com/dist/pa.umd.production.min.js">
 </script>
@@ -41,7 +40,6 @@
     min-height: 100vh;
   }
 
-  /* ── NAV ── */
   nav {
     background: var(--ocean);
     padding: 0 24px;
@@ -100,11 +98,9 @@
     font-size: 0.8rem;
   }
 
-  /* ── PAGES ── */
   .page { display: none; }
   .page.active { display: block; }
 
-  /* ── HERO ── */
   .hero {
     background: linear-gradient(135deg, var(--ocean) 0%, var(--sky) 60%, #2A9D8F 100%);
     color: var(--white);
@@ -187,7 +183,6 @@
 
   .search-bar button:hover { background: #d45f38; }
 
-  /* ── SECTIONS ── */
   .section {
     padding: 60px 24px;
     max-width: 1100px;
@@ -207,7 +202,6 @@
     margin-bottom: 32px;
   }
 
-  /* ── CARDS ── */
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -297,7 +291,6 @@
 
   .btn-reserve:hover { background: var(--sky); }
 
-  /* ── MODAL ── */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -421,7 +414,6 @@
     text-decoration: none;
   }
 
-  /* ── ALERT ── */
   .alert {
     padding: 12px 16px;
     border-radius: 8px;
@@ -434,7 +426,6 @@
   .alert.error { background: #FEE2E2; color: #991B1B; display: block; }
   .alert.info { background: #DBEAFE; color: #1E40AF; display: block; }
 
-  /* ── MIS RESERVAS ── */
   .bookings-header {
     background: linear-gradient(135deg, var(--ocean), var(--sky));
     color: var(--white);
@@ -498,7 +489,6 @@
   .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
   .empty-state h3 { font-family: 'Playfair Display', serif; color: var(--ocean); margin-bottom: 8px; }
 
-  /* ── ADMIN ── */
   .admin-header {
     background: var(--dark);
     color: var(--white);
@@ -601,7 +591,6 @@
   .btn-confirm { background: #D1FAE5; color: #065F46; }
   .btn-cancel { background: #FEE2E2; color: #991B1B; }
 
-  /* ── TOAST ── */
   .toast {
     position: fixed;
     bottom: 24px;
@@ -622,7 +611,6 @@
   .toast.success { background: var(--success); }
   .toast.error { background: var(--error); }
 
-  /* ── LOADER ── */
   .loader {
     display: flex;
     align-items: center;
@@ -640,7 +628,6 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── NAV MOBILE (hamburguesa) ── */
   .nav-toggle {
     display: none;
     background: none;
@@ -652,7 +639,6 @@
     line-height: 1;
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     .nav-toggle { display: block; }
 
@@ -719,7 +705,6 @@ background-position:center!important;
 </script>
 </head>
 <body id="top">
-<!-- NAV -->
 <nav>
 <div class="nav-brand">Chek<span>Travel</span></div>
 <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Abrir menú">☰</button>
@@ -735,7 +720,6 @@ background-position:center!important;
 <button class="nav-btn" id="nav-admin" onclick="showPage('admin');closeNav()" style="display:none">Admin</button>
 </div>
 </nav>
-<!-- ══ PAGE: HOME ══ -->
 <div class="page active" id="page-home">
 <div class="hero">
 <p class="hero-eyebrow">Hoteles · Vuelos · Tours · Actividades</p>
@@ -781,7 +765,6 @@ background-position:center!important;
 </div>
 </section>
 </div>
-<!-- ══ PAGE: DESTINATIONS ══ -->
 <div class="page" id="page-destinations">
 <div class="section" style="padding-top:40px">
 <h2 class="section-title">Todos los destinos</h2>
@@ -789,7 +772,6 @@ background-position:center!important;
 <div class="cards" id="allCards"></div>
 </div>
 </div>
-<!-- ══ PAGE: MY BOOKINGS ══ -->
 <div class="page" id="page-mybookings">
 <div class="bookings-header">
 <h1>Mis Reservas</h1>
@@ -799,7 +781,6 @@ background-position:center!important;
 <div class="loader"><div class="spinner"></div></div>
 </div>
 </div>
-<!-- ══ PAGE: ADMIN ══ -->
 <div class="page" id="page-admin">
 <div class="admin-header">
 <h1>Panel Administrativo</h1>
@@ -821,7 +802,6 @@ background-position:center!important;
 </div>
 </div>
 </div>
-<!-- ══ MODAL: LOGIN ══ -->
 <div class="modal-overlay" id="loginModal">
 <div class="modal">
 <button class="modal-close" onclick="closeModal('loginModal')">×</button>
@@ -840,7 +820,6 @@ background-position:center!important;
 <button class="btn-secondary" onclick="switchToRegister()">Crear cuenta nueva</button>
 </div>
 </div>
-<!-- ══ MODAL: REGISTER ══ -->
 <div class="modal-overlay" id="registerModal">
 <div class="modal">
 <button class="modal-close" onclick="closeModal('registerModal')">×</button>
@@ -863,7 +842,6 @@ background-position:center!important;
 <p class="auth-switch">¿Ya tienes cuenta? <a onclick="switchToLogin()">Inicia sesión</a></p>
 </div>
 </div>
-<!-- ══ MODAL: BOOKING ══ -->
 <div class="modal-overlay" id="bookingModal">
 <div class="modal">
 <button class="modal-close" onclick="closeModal('bookingModal')">×</button>
@@ -916,26 +894,22 @@ background-position:center!important;
 <button class="btn-primary" onclick="doBooking()">Confirmar Reserva</button>
 
 <div style="text-align:center;margin:20px 0;">
-  <a href="https://TU-LINK-DE-PAGO"
-     target="_blank"
-     class="btn-primary"
-     style="display:inline-block;max-width:280px;text-decoration:none;">
+  <button onclick="pagarConWebpay()" class="btn-primary" style="max-width:280px;">
      💳 Pagar ahora
-  </a>
+  </button>
 </div>
 
 </div>
 </div>
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 <script>
-// ── SUPABASE ──
 const SUPABASE_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhna2Nsd2p4ZHdmemJla2lod2lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDkwMDksImV4cCI6MjA5NzQ4NTAwOX0.tDJQCEvYpkKeo7sQGDcAI2AM1d63aNeTnUlHoTGKhxE';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── DESTINOS DATA ──
+const WEBPAY_CREATE_URL = 'https://xgkclwjxdwfzbekihwiq.functions.supabase.co/webpay-create';
+
 const DESTINATIONS = [
   { id: 1, name: 'Puerto Varas', region: 'Los Lagos', type: 'Cabaña', desc: 'Junto al lago Llanquihue con vista al volcán Osorno.', price: 89000, emoji: '🏔️', gradient: 'linear-gradient(135deg,#1A6B9A,#2A9D8F)' },
   { id: 2, name: 'Chiloé', region: 'Los Lagos', type: 'Hospedaje', desc: 'Palafitos y naturaleza única en la isla grande.', price: 65000, emoji: '🌊', gradient: 'linear-gradient(135deg,#0D3B5E,#1A6B9A)' },
@@ -947,9 +921,8 @@ const DESTINATIONS = [
 
 let currentUser = null;
 let currentDestination = null;
-const ADMIN_EMAIL = 'dautgabens926@gmail.com'; // Cambia por tu email admin
+const ADMIN_EMAIL = 'dautgabens926@gmail.com';
 
-// ── INIT ──
 window.onload = async () => {
   renderCards('featuredCards', DESTINATIONS.slice(0,3));
   renderCards('allCards', DESTINATIONS);
@@ -959,13 +932,11 @@ window.onload = async () => {
     if (event === 'SIGNED_IN') handleUser(session.user);
     if (event === 'SIGNED_OUT') handleLogout();
   });
-  // Set min dates
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('bookCheckin').min = today;
   document.getElementById('bookCheckout').min = today;
 };
 
-// ── USER ──
 function handleUser(user) {
   currentUser = user;
   document.getElementById('userEmail').textContent = user.email.split('@')[0];
@@ -985,7 +956,6 @@ function handleLogout() {
   document.getElementById('nav-admin').style.display = 'none';
 }
 
-// ── NAV MOBILE ──
 function toggleNav() {
   document.getElementById('navLinks').classList.toggle('open');
 }
@@ -993,7 +963,6 @@ function closeNav() {
   document.getElementById('navLinks').classList.remove('open');
 }
 
-// ── PAGES ──
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -1006,7 +975,6 @@ function showPage(name) {
   if (name === 'admin') loadAdminBookings();
 }
 
-// ── RENDER CARDS ──
 function renderCards(containerId, items) {
   const container = document.getElementById(containerId);
   container.innerHTML = items.map(d => `
@@ -1025,7 +993,6 @@ function renderCards(containerId, items) {
   `).join('');
 }
 
-// ── SEARCH ──
 function doSearch(e) {
   if (e && e.type === 'keyup' && e.key !== 'Enter') return;
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -1040,7 +1007,6 @@ function doSearch(e) {
   if (!results.length) showToast('No encontramos resultados. Mostrando todos.', 'error');
 }
 
-// ── MODALS ──
 function openModal(id) {
   document.getElementById(id).classList.add('open');
 }
@@ -1063,7 +1029,6 @@ function switchToLogin() {
   openModal('loginModal');
 }
 
-// ── AUTH ──
 async function doLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
@@ -1121,7 +1086,6 @@ async function logout() {
   showToast('Sesión cerrada', '');
 }
 
-// ── BOOKING ──
 function openBookingModal(destId) {
   if (!currentUser) {
     openModal('loginModal');
@@ -1133,7 +1097,6 @@ function openBookingModal(destId) {
   document.getElementById('bookingTitle').textContent = 'Reservar en ' + dest.name;
   document.getElementById('bookingSubtitle').textContent = dest.type + ' · ' + dest.region + ' · $' + dest.price.toLocaleString('es-CL') + '/noche';
   document.getElementById('bookingAlert').className = 'alert';
-  // Prefill name
   const name = currentUser.user_metadata?.full_name || '';
   document.getElementById('bookName').value = name;
   openModal('bookingModal');
@@ -1165,7 +1128,7 @@ async function doBooking() {
   const nights = Math.ceil((new Date(checkout) - new Date(checkin)) / (1000*60*60*24));
   const total = nights * currentDestination.price;
 
-  const { error } = await sb.from('bookings').insert({
+  const { data: newBooking, error } = await sb.from('bookings').insert({
     user_id: currentUser.id,
     user_email: currentUser.email,
     guest_name: name,
@@ -1182,19 +1145,58 @@ async function doBooking() {
     total_price: total,
     status: 'pending',
     created_at: new Date().toISOString()
-  });
+  }).select().single();
 
   if (error) {
     alert.className = 'alert error';
     alert.textContent = 'Error al guardar: ' + error.message;
   } else {
+    window.currentBookingId = newBooking.id;
+    window.currentBookingAmount = total;
     closeModal('bookingModal');
     showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
     showPage('mybookings');
   }
 }
 
-// ── MY BOOKINGS ──
+async function pagarConWebpay() {
+  if (!window.currentBookingId) {
+    showToast('Primero completa una reserva', 'error');
+    return;
+  }
+  showToast('Redirigiendo a Webpay...', '');
+
+  try {
+    const res = await fetch(WEBPAY_CREATE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bookingId: window.currentBookingId,
+        amount: window.currentBookingAmount
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.url) {
+      showToast('No se pudo iniciar el pago', 'error');
+      return;
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = data.url;
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'token_ws';
+    input.value = data.token;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  } catch (err) {
+    showToast('Error de conexión al iniciar el pago', 'error');
+  }
+}
+
 async function loadMyBookings() {
   if (!currentUser) { showPage('home'); return; }
   const container = document.getElementById('bookingsList');
@@ -1232,7 +1234,6 @@ async function loadMyBookings() {
   `).join('');
 }
 
-// ── ADMIN ──
 async function loadAdminBookings() {
   const { data, error } = await sb.from('bookings')
     .select('*')
@@ -1293,7 +1294,6 @@ async function updateStatus(id, status) {
   loadAdminBookings();
 }
 
-// ── UTILS ──
 function formatDate(d) {
   if (!d) return '—';
   const [y, m, day] = d.split('-');
@@ -1473,4 +1473,4 @@ function showToast(msg, type) {
 </div>
 </div></section>
 </body>
-  </html>
+</html>
