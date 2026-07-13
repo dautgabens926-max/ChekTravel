@@ -891,9 +891,9 @@ background-position:center!important;
 <label>Notas adicionales</label>
 <textarea id="bookNotes" placeholder="Solicitudes especiales, llegada tardía, etc." rows="2"></textarea>
 </div>
-<button class="btn-primary" onclick="doBooking()">Confirmar Reserva</button>
+<button class="btn-primary" id="btnConfirmarReserva" onclick="doBooking()">Confirmar Reserva</button>
 
-<div style="text-align:center;margin:20px 0;">
+<div style="text-align:center;margin:20px 0;display:none" id="pagoBox">
   <button onclick="pagarConWebpay()" class="btn-primary" style="max-width:280px;">
      💳 Pagar ahora
   </button>
@@ -1099,6 +1099,10 @@ function openBookingModal(destId) {
   document.getElementById('bookingAlert').className = 'alert';
   const name = currentUser.user_metadata?.full_name || '';
   document.getElementById('bookName').value = name;
+  document.getElementById('btnConfirmarReserva').style.display = 'block';
+  document.getElementById('pagoBox').style.display = 'none';
+  window.currentBookingId = null;
+  window.currentBookingAmount = null;
   openModal('bookingModal');
 }
 
@@ -1153,9 +1157,11 @@ async function doBooking() {
   } else {
     window.currentBookingId = newBooking.id;
     window.currentBookingAmount = total;
-    closeModal('bookingModal');
-    showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
-    showPage('mybookings');
+    alert.className = 'alert success';
+    alert.textContent = '¡Reserva guardada! Ahora puedes pagar para confirmarla.';
+    document.getElementById('btnConfirmarReserva').style.display = 'none';
+    document.getElementById('pagoBox').style.display = 'block';
+    showToast('¡Reserva guardada!', 'success');
   }
 }
 
