@@ -1175,7 +1175,7 @@ async function pagarConWebpay() {
   try {
     const res = await fetch(WEBPAY_CREATE_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         bookingId: window.currentBookingId,
         amount: window.currentBookingAmount
