@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head><script async="" data-gyg-partner-id="XXWGYEX" defer="" src="https://widget.getyourguide.com/dist/pa.umd.production.min.js">
 </script>
@@ -40,6 +41,7 @@
     min-height: 100vh;
   }
 
+  /* ── NAV ── */
   nav {
     background: var(--ocean);
     padding: 0 24px;
@@ -98,9 +100,11 @@
     font-size: 0.8rem;
   }
 
+  /* ── PAGES ── */
   .page { display: none; }
   .page.active { display: block; }
 
+  /* ── HERO ── */
   .hero {
     background: linear-gradient(135deg, var(--ocean) 0%, var(--sky) 60%, #2A9D8F 100%);
     color: var(--white);
@@ -183,6 +187,7 @@
 
   .search-bar button:hover { background: #d45f38; }
 
+  /* ── SECTIONS ── */
   .section {
     padding: 60px 24px;
     max-width: 1100px;
@@ -202,6 +207,7 @@
     margin-bottom: 32px;
   }
 
+  /* ── CARDS ── */
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -291,6 +297,7 @@
 
   .btn-reserve:hover { background: var(--sky); }
 
+  /* ── MODAL ── */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -414,6 +421,7 @@
     text-decoration: none;
   }
 
+  /* ── ALERT ── */
   .alert {
     padding: 12px 16px;
     border-radius: 8px;
@@ -426,6 +434,7 @@
   .alert.error { background: #FEE2E2; color: #991B1B; display: block; }
   .alert.info { background: #DBEAFE; color: #1E40AF; display: block; }
 
+  /* ── MIS RESERVAS ── */
   .bookings-header {
     background: linear-gradient(135deg, var(--ocean), var(--sky));
     color: var(--white);
@@ -489,6 +498,7 @@
   .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
   .empty-state h3 { font-family: 'Playfair Display', serif; color: var(--ocean); margin-bottom: 8px; }
 
+  /* ── ADMIN ── */
   .admin-header {
     background: var(--dark);
     color: var(--white);
@@ -591,6 +601,7 @@
   .btn-confirm { background: #D1FAE5; color: #065F46; }
   .btn-cancel { background: #FEE2E2; color: #991B1B; }
 
+  /* ── TOAST ── */
   .toast {
     position: fixed;
     bottom: 24px;
@@ -611,6 +622,7 @@
   .toast.success { background: var(--success); }
   .toast.error { background: var(--error); }
 
+  /* ── LOADER ── */
   .loader {
     display: flex;
     align-items: center;
@@ -628,52 +640,10 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 4px 8px;
-    line-height: 1;
-  }
-
-  @media (max-width: 700px) {
-    .nav-toggle { display: block; }
-
-    .nav-links {
-      display: none;
-      position: absolute;
-      top: 64px;
-      left: 0;
-      right: 0;
-      background: var(--ocean);
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      padding: 8px 16px 16px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
-    }
-
-    .nav-links.open { display: flex; }
-
-    .nav-links .nav-btn,
-    .nav-links .nav-btn.cta {
-      width: 100%;
-      text-align: left;
-      padding: 12px 10px;
-      font-size: 0.95rem;
-    }
-
-    .nav-links .user-info {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-      padding: 10px;
-    }
-
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
     .nav-brand { font-size: 1.1rem; }
+    .nav-btn { padding: 6px 10px; font-size: 0.8rem; }
     .hero { padding: 60px 16px 80px; }
     .booking-card { flex-direction: column; align-items: flex-start; }
     .form-row { grid-template-columns: 1fr; }
@@ -695,7 +665,7 @@ background-position:center!important;
 .why-item{padding:15px}
 .why-item h3{margin:10px 0}
 </style>
-<script>
+<script data-cfasync="false" data-no-defer="1" data-noptimize="1" data-wpfc-render="false" nowprocket="" seraph-accel-crit="1">
   (function () {
       var script = document.createElement("script");
       script.async = 1;
@@ -705,21 +675,22 @@ background-position:center!important;
 </script>
 </head>
 <body id="top">
+<!-- NAV -->
 <nav>
 <div class="nav-brand">Chek<span>Travel</span></div>
-<button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Abrir menú">☰</button>
-<div class="nav-links" id="navLinks">
-<button class="nav-btn active" onclick="showPage('home');closeNav()">Inicio</button>
-<button class="nav-btn" onclick="showPage('destinations');closeNav()">Destinos</button>
-<button class="nav-btn" id="nav-bookings" onclick="showPage('mybookings');closeNav()" style="display:none">Mis Reservas</button>
+<div class="nav-links">
+<button class="nav-btn active" onclick="showPage('home')">Inicio</button>
+<button class="nav-btn" onclick="showPage('destinations')">Destinos</button>
+<button class="nav-btn" id="nav-bookings" onclick="showPage('mybookings')" style="display:none">Mis Reservas</button>
 <div class="user-info" id="userInfo" style="display:none">
 <span id="userEmail"></span>
-<button class="nav-btn" onclick="logout();closeNav()">Salir</button>
+<button class="nav-btn" onclick="logout()">Salir</button>
 </div>
-<button class="nav-btn cta" id="nav-login" onclick="openModal('loginModal');closeNav()">Iniciar Sesión</button>
-<button class="nav-btn" id="nav-admin" onclick="showPage('admin');closeNav()" style="display:none">Admin</button>
+<button class="nav-btn cta" id="nav-login" onclick="openModal('loginModal')">Iniciar Sesión</button>
+<button class="nav-btn" id="nav-admin" onclick="showPage('admin')" style="display:none">Admin</button>
 </div>
 </nav>
+<!-- ══ PAGE: HOME ══ -->
 <div class="page active" id="page-home">
 <div class="hero">
 <p class="hero-eyebrow">Hoteles · Vuelos · Tours · Actividades</p>
@@ -765,6 +736,7 @@ background-position:center!important;
 </div>
 </section>
 </div>
+<!-- ══ PAGE: DESTINATIONS ══ -->
 <div class="page" id="page-destinations">
 <div class="section" style="padding-top:40px">
 <h2 class="section-title">Todos los destinos</h2>
@@ -772,6 +744,7 @@ background-position:center!important;
 <div class="cards" id="allCards"></div>
 </div>
 </div>
+<!-- ══ PAGE: MY BOOKINGS ══ -->
 <div class="page" id="page-mybookings">
 <div class="bookings-header">
 <h1>Mis Reservas</h1>
@@ -781,6 +754,7 @@ background-position:center!important;
 <div class="loader"><div class="spinner"></div></div>
 </div>
 </div>
+<!-- ══ PAGE: ADMIN ══ -->
 <div class="page" id="page-admin">
 <div class="admin-header">
 <h1>Panel Administrativo</h1>
@@ -802,6 +776,7 @@ background-position:center!important;
 </div>
 </div>
 </div>
+<!-- ══ MODAL: LOGIN ══ -->
 <div class="modal-overlay" id="loginModal">
 <div class="modal">
 <button class="modal-close" onclick="closeModal('loginModal')">×</button>
@@ -820,6 +795,7 @@ background-position:center!important;
 <button class="btn-secondary" onclick="switchToRegister()">Crear cuenta nueva</button>
 </div>
 </div>
+<!-- ══ MODAL: REGISTER ══ -->
 <div class="modal-overlay" id="registerModal">
 <div class="modal">
 <button class="modal-close" onclick="closeModal('registerModal')">×</button>
@@ -842,6 +818,7 @@ background-position:center!important;
 <p class="auth-switch">¿Ya tienes cuenta? <a onclick="switchToLogin()">Inicia sesión</a></p>
 </div>
 </div>
+<!-- ══ MODAL: BOOKING ══ -->
 <div class="modal-overlay" id="bookingModal">
 <div class="modal">
 <button class="modal-close" onclick="closeModal('bookingModal')">×</button>
@@ -891,25 +868,19 @@ background-position:center!important;
 <label>Notas adicionales</label>
 <textarea id="bookNotes" placeholder="Solicitudes especiales, llegada tardía, etc." rows="2"></textarea>
 </div>
-<button class="btn-primary" id="btnConfirmarReserva" onclick="doBooking()">Confirmar Reserva</button>
-
-<div style="text-align:center;margin:20px 0;display:none" id="pagoBox">
-  <button onclick="pagarConWebpay()" class="btn-primary" style="max-width:280px;">
-     💳 Pagar ahora
-  </button>
-</div>
-
+<button class="btn-primary" onclick="doBooking()">Confirmar Reserva</button>
 </div>
 </div>
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 <script>
+// ── SUPABASE ──
 const SUPABASE_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhna2Nsd2p4ZHdmemJla2lod2lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDkwMDksImV4cCI6MjA5NzQ4NTAwOX0.tDJQCEvYpkKeo7sQGDcAI2AM1d63aNeTnUlHoTGKhxE';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const WEBPAY_CREATE_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co/functions/v1/webpay-create';
-
+// ── DESTINOS DATA ──
 const DESTINATIONS = [
   { id: 1, name: 'Puerto Varas', region: 'Los Lagos', type: 'Cabaña', desc: 'Junto al lago Llanquihue con vista al volcán Osorno.', price: 89000, emoji: '🏔️', gradient: 'linear-gradient(135deg,#1A6B9A,#2A9D8F)' },
   { id: 2, name: 'Chiloé', region: 'Los Lagos', type: 'Hospedaje', desc: 'Palafitos y naturaleza única en la isla grande.', price: 65000, emoji: '🌊', gradient: 'linear-gradient(135deg,#0D3B5E,#1A6B9A)' },
@@ -921,8 +892,9 @@ const DESTINATIONS = [
 
 let currentUser = null;
 let currentDestination = null;
-const ADMIN_EMAIL = 'dautgabens926@gmail.com';
+const ADMIN_EMAIL = 'dautgabens926@gmail.com'; // Cambia por tu email admin
 
+// ── INIT ──
 window.onload = async () => {
   renderCards('featuredCards', DESTINATIONS.slice(0,3));
   renderCards('allCards', DESTINATIONS);
@@ -932,11 +904,13 @@ window.onload = async () => {
     if (event === 'SIGNED_IN') handleUser(session.user);
     if (event === 'SIGNED_OUT') handleLogout();
   });
+  // Set min dates
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('bookCheckin').min = today;
   document.getElementById('bookCheckout').min = today;
 };
 
+// ── USER ──
 function handleUser(user) {
   currentUser = user;
   document.getElementById('userEmail').textContent = user.email.split('@')[0];
@@ -956,13 +930,7 @@ function handleLogout() {
   document.getElementById('nav-admin').style.display = 'none';
 }
 
-function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
-function closeNav() {
-  document.getElementById('navLinks').classList.remove('open');
-}
-
+// ── PAGES ──
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -975,24 +943,27 @@ function showPage(name) {
   if (name === 'admin') loadAdminBookings();
 }
 
+// ── RENDER CARDS ──
 function renderCards(containerId, items) {
   const container = document.getElementById(containerId);
   container.innerHTML = items.map(d => `
-    <div class="card" onclick="openBookingModal(${d.id})">
-      <div class="card-img-placeholder" style="background:${d.gradient}">${d.emoji}</div>
+    <div class="card">
+      <div class="card-img-placeholder" style="background:${d.gradient}" onclick="openBookingModal(${d.id})">${d.emoji}</div>
       <div class="card-body">
         <div class="card-tag">${d.type} · ${d.region}</div>
-        <h3>${d.name}</h3>
+        <h3 onclick="openBookingModal(${d.id})" style="cursor:pointer">${d.name}</h3>
         <p>${d.desc}</p>
-        <div class="card-footer">
+        <div class="card-footer" style="flex-direction:column;align-items:stretch;gap:8px">
           <div class="price">$${d.price.toLocaleString('es-CL')} <span>/ noche</span></div>
-          <button class="btn-reserve">Reservar</button>
+          <a href="https://www.tkqlhce.com/click-101809270-13379262" target="_blank" style="display:block;text-align:center;background:#E8714A;color:white;padding:10px;border-radius:8px;text-decoration:none;font-weight:600">🏨 Ver hoteles reales en ${d.name}</a>
+          <button class="btn-reserve" onclick="openBookingModal(${d.id})">Enviar solicitud de reserva</button>
         </div>
       </div>
     </div>
   `).join('');
 }
 
+// ── SEARCH ──
 function doSearch(e) {
   if (e && e.type === 'keyup' && e.key !== 'Enter') return;
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -1007,6 +978,7 @@ function doSearch(e) {
   if (!results.length) showToast('No encontramos resultados. Mostrando todos.', 'error');
 }
 
+// ── MODALS ──
 function openModal(id) {
   document.getElementById(id).classList.add('open');
 }
@@ -1029,6 +1001,7 @@ function switchToLogin() {
   openModal('loginModal');
 }
 
+// ── AUTH ──
 async function doLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
@@ -1086,6 +1059,7 @@ async function logout() {
   showToast('Sesión cerrada', '');
 }
 
+// ── BOOKING ──
 function openBookingModal(destId) {
   if (!currentUser) {
     openModal('loginModal');
@@ -1097,12 +1071,9 @@ function openBookingModal(destId) {
   document.getElementById('bookingTitle').textContent = 'Reservar en ' + dest.name;
   document.getElementById('bookingSubtitle').textContent = dest.type + ' · ' + dest.region + ' · $' + dest.price.toLocaleString('es-CL') + '/noche';
   document.getElementById('bookingAlert').className = 'alert';
+  // Prefill name
   const name = currentUser.user_metadata?.full_name || '';
   document.getElementById('bookName').value = name;
-  document.getElementById('btnConfirmarReserva').style.display = 'block';
-  document.getElementById('pagoBox').style.display = 'none';
-  window.currentBookingId = null;
-  window.currentBookingAmount = null;
   openModal('bookingModal');
 }
 
@@ -1132,7 +1103,7 @@ async function doBooking() {
   const nights = Math.ceil((new Date(checkout) - new Date(checkin)) / (1000*60*60*24));
   const total = nights * currentDestination.price;
 
-  const { data: newBooking, error } = await sb.from('bookings').insert({
+  const { error } = await sb.from('bookings').insert({
     user_id: currentUser.id,
     user_email: currentUser.email,
     guest_name: name,
@@ -1149,60 +1120,19 @@ async function doBooking() {
     total_price: total,
     status: 'pending',
     created_at: new Date().toISOString()
-  }).select().single();
+  });
 
   if (error) {
     alert.className = 'alert error';
     alert.textContent = 'Error al guardar: ' + error.message;
   } else {
-    window.currentBookingId = newBooking.id;
-    window.currentBookingAmount = total;
-    alert.className = 'alert success';
-    alert.textContent = '¡Reserva guardada! Ahora puedes pagar para confirmarla.';
-    document.getElementById('btnConfirmarReserva').style.display = 'none';
-    document.getElementById('pagoBox').style.display = 'block';
-    showToast('¡Reserva guardada!', 'success');
+    closeModal('bookingModal');
+    showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
+    showPage('mybookings');
   }
 }
 
-async function pagarConWebpay() {
-  if (!window.currentBookingId) {
-    showToast('Primero completa una reserva', 'error');
-    return;
-  }
-  showToast('Redirigiendo a Webpay...', '');
-
-  try {
-    const res = await fetch(WEBPAY_CREATE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        bookingId: window.currentBookingId,
-        amount: window.currentBookingAmount
-      })
-    });
-
-    const data = await res.json();
-    if (!res.ok || !data.url) {
-      showToast('No se pudo iniciar el pago', 'error');
-      return;
-    }
-
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = data.url;
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'token_ws';
-    input.value = data.token;
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-  } catch (err) {
-    showToast('Error de conexión al iniciar el pago', 'error');
-  }
-}
-
+// ── MY BOOKINGS ──
 async function loadMyBookings() {
   if (!currentUser) { showPage('home'); return; }
   const container = document.getElementById('bookingsList');
@@ -1240,6 +1170,7 @@ async function loadMyBookings() {
   `).join('');
 }
 
+// ── ADMIN ──
 async function loadAdminBookings() {
   const { data, error } = await sb.from('bookings')
     .select('*')
@@ -1300,6 +1231,7 @@ async function updateStatus(id, status) {
   loadAdminBookings();
 }
 
+// ── UTILS ──
 function formatDate(d) {
   if (!d) return '—';
   const [y, m, day] = d.split('-');
@@ -1343,7 +1275,6 @@ function showToast(msg, type) {
 <a class="cardx" href="https://gyg.me/O9te8pzw" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Playa_Bavaro.JPG?width=800" alt="Punta Cana - ChekTravel"/><div><h3>Punta Cana</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a>
 <a class="cardx" href="https://gyg.me/IGLdGt1d" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dubai_skyline_2015_(crop).jpg?width=800" alt="Dubái - ChekTravel"/><div><h3>Dubái</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a>
 <a class="cardx" href="https://gyg.me/wtPnkPtY" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel_Wikimedia_Commons.jpg?width=800" alt="París - ChekTravel"/><div><h3>París</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a>
-<a class="cardx" href="https://www.jdoqocy.com/click-101809270-10438016" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel_Wikimedia_Commons.jpg?width=800" alt="Hoteles París - ChekTravel"/><div><h3>🏨 Hoteles en París</h3><p>Encuentra y reserva los mejores hoteles en París con Hotels.com.</p><span class="btn">Reservar hotel</span></div></a>
 <a class="cardx" href="https://gyg.me/T2beCHn5" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hollywood_sign_hill_view.jpg?width=800" alt="Los Ángeles - ChekTravel"/><div><h3>Los Ángeles</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a>
 <a class="cardx" href="https://gyg.me/PxrUGKp9" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pucon-y-su-Volcan.jpg?width=800" alt="Villarrica - ChekTravel"/><div><h3>Villarrica</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a>
 <a class="cardx" href="https://www.tkqlhce.com/click-101809270-17137215" target="_blank">
@@ -1394,14 +1325,6 @@ function showToast(msg, type) {
 <span class="btn">Reservar hotel</span>
 </div>
 </a>
-<a class="cardx" href="https://www.anrdoezrs.net/click-101809270-10433860" target="_blank">
-<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gershwin_Hotel_street_facade.jpg?width=800" alt="Ofertas Hotels.com - ChekTravel"/>
-<div>
-<h3>🏨 Hotels.com Ofertas</h3>
-<p>Busca las mejores ofertas de hoteles con Hotels.com.</p>
-<span class="btn">Buscar ofertas</span>
-</div>
-</a>
 <a class="cardx" href="https://www.tkqlhce.com/click-101809270-15200549" target="_blank">
 <img src="https://commons.wikimedia.org/wiki/Special:FilePath/All_Nippon_Airways_Boeing_787-8_Dreamliner_JA801A_OKJ_in_flight.jpg?width=800" alt="Ofertas de vuelos Expedia - ChekTravel"/>
 <div>
@@ -1426,30 +1349,6 @@ function showToast(msg, type) {
 <span class="btn">Buscar hoteles</span>
 </div>
 </a>
-<a class="cardx" href="https://www.dpbolvw.net/click-101809270-17314768" target="_blank">
-<img src="https://commons.wikimedia.org/wiki/Special:FilePath/All_Nippon_Airways_Boeing_787-8_Dreamliner_JA801A_OKJ_in_flight.jpg?width=800" alt="Vuelos Booking.com - ChekTravel"/>
-<div>
-<h3>✈️ Booking.com Vuelos</h3>
-<p>Reserva vuelos con Booking.com al mejor precio.</p>
-<span class="btn">Reservar vuelos</span>
-</div>
-</a>
-<a class="cardx" href="https://www.dpbolvw.net/click-101809270-17289011" target="_blank">
-<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Delmar_hotel_room_sea_side.jpg?width=800" alt="Alojamiento Booking.com - ChekTravel"/>
-<div>
-<h3>🏨 Booking.com Alojamiento</h3>
-<p>Encuentra hoteles, apartamentos y casas vacacionales con Booking.com.</p>
-<span class="btn">Reservar alojamiento</span>
-</div>
-</a>
-<a class="cardx" href="https://www.jdoqocy.com/click-101809270-17085755" target="_blank">
-<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bruxelles_-_Grand_Place_02.jpg?width=800" alt="Hoteles Bélgica - ChekTravel"/>
-<div>
-<h3>🏨 Hoteles en Bélgica</h3>
-<p>Encuentra y reserva los mejores hoteles en Bélgica con Hotels.com.</p>
-<span class="btn">Reservar hotel</span>
-</div>
-</a>
 <div class="cardx" id="vuelos-kiwi" style="grid-column: span 2;">
 <div style="padding:18px 18px 0;">
 <h3>✈️ Vuelos con Kiwi.com</h3>
@@ -1457,15 +1356,6 @@ function showToast(msg, type) {
 </div>
 <div style="padding:0 18px 18px;">
 <script async="" charset="utf-8" src="https://tpwgt.com/content?currency=usd&amp;trs=545743&amp;shmarker=745947&amp;locale=en&amp;powered_by=true&amp;limit=4&amp;primary_color=00AE98&amp;results_background_color=FFFFFF&amp;form_background_color=FFFFFF&amp;campaign_id=111&amp;promo_id=3411"></script>
-</div>
-</div>
-<div class="cardx" id="vuelos-miami" style="grid-column: span 2;">
-<div style="padding:18px 18px 0;">
-<h3>✈️ Vuelos baratos a Miami</h3>
-<p>Compara precios desde distintos orígenes hacia Miami, Estados Unidos.</p>
-</div>
-<div style="padding:0 18px 18px;">
-<script async="" charset="utf-8" src="https://tpwgt.com/content?currency=usd&amp;trs=545743&amp;shmarker=745947&amp;target_host=www.aviasales.com%2Fsearch&amp;locale=en&amp;limit=6&amp;powered_by=true&amp;primary=%230085FF&amp;promo_id=4044&amp;campaign_id=100&amp;destination=MIA"></script>
 </div>
 </div>
 <div class="cardx" style="grid-column: span 2;">
