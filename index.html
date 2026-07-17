@@ -868,7 +868,7 @@ background-position:center!important;
 <label>Notas adicionales</label>
 <textarea id="bookNotes" placeholder="Solicitudes especiales, llegada tardía, etc." rows="2"></textarea>
 </div>
-<button class="btn-primary" onclick="doBooking()">Confirmar Reserva</button>
+<button class="btn-primary" id="btnConfirmarReserva" onclick="doBooking()">Confirmar y Pagar con Webpay</button>
 </div>
 </div>
 <!-- TOAST -->
@@ -876,6 +876,7 @@ background-position:center!important;
 <script>
 // ── SUPABASE ──
 const SUPABASE_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co';
+const SUPABASE_FUNCTIONS_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co/functions/v1';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhna2Nsd2p4ZHdmemJla2lod2lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDkwMDksImV4cCI6MjA5NzQ4NTAwOX0.tDJQCEvYpkKeo7sQGDcAI2AM1d63aNeTnUlHoTGKhxE';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -1103,7 +1104,11 @@ async function doBooking() {
   const nights = Math.ceil((new Date(checkout) - new Date(checkin)) / (1000*60*60*24));
   const total = nights * currentDestination.price;
 
-  const { error } = await sb.from('bookings').insert({
+  const btn = document.getElementById('btnConfirmarReserva');
+  btn.disabled = true;
+  btn.textContent = 'Procesando...';
+
+  const { data, error } = await sb.from('bookings').insert({
     user_id: currentUser.id,
     user_email: currentUser.email,
     guest_name: name,
@@ -1120,16 +1125,60 @@ async function doBooking() {
     total_price: total,
     status: 'pending',
     created_at: new Date().toISOString()
-  });
+  }).select().single();
 
   if (error) {
     alert.className = 'alert error';
     alert.textContent = 'Error al guardar: ' + error.message;
-  } else {
-    closeModal('bookingModal');
-    showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
-    showPage('mybookings');
+    btn.disabled = false;
+    btn.textContent = 'Confirmar y Pagar con Webpay';
+    return;
   }
+
+  // Reserva guardada correctamente -> iniciar pago con Webpay
+  try {
+    await iniciarPagoWebpay(data.id, total);
+  } catch (err) {
+    alert.className = 'alert error';
+    alert.textContent = 'La reserva se guardó, pero no se pudo iniciar el pago. Intenta desde "Mis Reservas".';
+    btn.disabled = false;
+    btn.textContent = 'Confirmar y Pagar con Webpay';
+  }
+}
+
+// ── PAGO WEBPAY (TRANSBANK) ──
+async function iniciarPagoWebpay(bookingId, amount) {
+  const returnUrl = window.location.origin + '/webpay-retorno.html';
+
+  const res = await fetch(`${SUPABASE_FUNCTIONS_URL}/webpay-create`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      booking_id: bookingId,
+      amount: amount,
+      return_url: returnUrl
+    })
+  });
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    throw new Error(result.error ? JSON.stringify(result.error) : 'Error desconocido');
+  }
+
+  // Transbank exige redirección vía POST (formulario), no un simple location.href
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = result.url;
+
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'token_ws';
+  input.value = result.token;
+
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
 }
 
 // ── MY BOOKINGS ──
