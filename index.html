@@ -723,7 +723,6 @@ background-position:center!important;
 <a href="#vuelos-kiwi" style="display:block;color:inherit;text-decoration:none"><div class="offer-card"><h3>✈️ Vuelos</h3><p>Compara cientos de rutas.</p></div></a>
 <a href="https://gyg.me/ZaBqhn4" style="display:block;color:inherit;text-decoration:none" target="_blank"><div class="offer-card"><h3>🎟️ Tours</h3><p>Experiencias inolvidables.</p></div></a>
 <a href="https://kkday.tpk.lv/2QltoggV" style="display:block;color:inherit;text-decoration:none" target="_blank"><div class="offer-card"><h3>🛡️ Viaja seguro</h3><p>Reserva con confianza.</p></div></a>
-<a href="https://www.booking.com/taxi/index.html?aid=8133105&label=affnetcj-17322922_pub-7936907_site-101809270_pname-Gabens+Daut_clkid-_cjevent-5489a16782b111f1827b03e70a82b832&utm_source=affnetcj&utm_medium=bannerindex&utm_campaign=gb&utm_term=index-17322922" style="display:block;color:inherit;text-decoration:none" target="_blank"><div class="offer-card"><h3>🚕 Taxis</h3><p>Traslados seguros y a tiempo.</p></div></a>
 </div>
 </section>
 
@@ -870,9 +869,6 @@ background-position:center!important;
 <textarea id="bookNotes" placeholder="Solicitudes especiales, llegada tardía, etc." rows="2"></textarea>
 </div>
 <button class="btn-primary" onclick="doBooking()">Confirmar Reserva</button>
-<button class="btn-primary" onclick="pagarConWebpay()" style="margin-top:10px;background:#28a745;">
-    💳 Pagar ahora
-</button>
 </div>
 </div>
 <!-- TOAST -->
@@ -881,7 +877,6 @@ background-position:center!important;
 // ── SUPABASE ──
 const SUPABASE_URL = 'https://xgkclwjxdwfzbekihwiq.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhna2Nsd2p4ZHdmemJla2lod2lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDkwMDksImV4cCI6MjA5NzQ4NTAwOX0.tDJQCEvYpkKeo7sQGDcAI2AM1d63aNeTnUlHoTGKhxE';
-const SUPABASE_FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -893,10 +888,6 @@ const DESTINATIONS = [
   { id: 4, name: 'Puerto Montt', region: 'Los Lagos', type: 'Hotel', desc: 'Centro de conexión al sur austral de Chile.', price: 72000, emoji: '⚓', gradient: 'linear-gradient(135deg,#2A9D8F,#1A6B9A)' },
   { id: 5, name: 'Osorno', region: 'Los Lagos', type: 'Apartamento', desc: 'Ciudad tranquila, puerta de entrada a la Patagonia.', price: 55000, emoji: '🏡', gradient: 'linear-gradient(135deg,#6B7280,#4B5563)' },
   { id: 6, name: 'Frutillar', region: 'Los Lagos', type: 'Cabaña', desc: 'Arquitectura alemana y paisajes de lago incomparables.', price: 82000, emoji: '🎵', gradient: 'linear-gradient(135deg,#1A6B9A,#0D3B5E)' },
-  { id: 7, name: 'Buenos Aires', region: 'Argentina', type: 'Apartamento', desc: 'Tango, arquitectura europea y vida porteña.', price: 75000, emoji: '💃', gradient: 'linear-gradient(135deg,#5B8FB9,#1A6B9A)' },
-  { id: 8, name: 'Bariloche', region: 'Argentina', type: 'Cabaña', desc: 'Lagos patagónicos, chocolate y montañas nevadas.', price: 98000, emoji: '🍫', gradient: 'linear-gradient(135deg,#2A9D8F,#0D3B5E)' },
-  { id: 9, name: 'Mendoza', region: 'Argentina', type: 'Hotel', desc: 'Capital del vino, bodegas boutique y cordillera.', price: 68000, emoji: '🍷', gradient: 'linear-gradient(135deg,#8B3A3A,#c45a35)' },
-  { id: 10, name: 'Cancún', region: 'México', type: 'Hotel', desc: 'Playas caribeñas de aguas turquesa y todo incluido.', price: 120000, emoji: '🏖️', gradient: 'linear-gradient(135deg,#00A8CC,#0D3B5E)' },
 ];
 
 let currentUser = null;
@@ -956,16 +947,15 @@ function showPage(name) {
 function renderCards(containerId, items) {
   const container = document.getElementById(containerId);
   container.innerHTML = items.map(d => `
-    <div class="card">
-      <div class="card-img-placeholder" style="background:${d.gradient}" onclick="openBookingModal(${d.id})">${d.emoji}</div>
+    <div class="card" onclick="openBookingModal(${d.id})">
+      <div class="card-img-placeholder" style="background:${d.gradient}">${d.emoji}</div>
       <div class="card-body">
         <div class="card-tag">${d.type} · ${d.region}</div>
-        <h3 onclick="openBookingModal(${d.id})" style="cursor:pointer">${d.name}</h3>
+        <h3>${d.name}</h3>
         <p>${d.desc}</p>
-        <div class="card-footer" style="flex-direction:column;align-items:stretch;gap:8px">
+        <div class="card-footer">
           <div class="price">$${d.price.toLocaleString('es-CL')} <span>/ noche</span></div>
-          <a href="https://www.tkqlhce.com/click-101809270-13379262" target="_blank" style="display:block;text-align:center;background:#E8714A;color:white;padding:10px;border-radius:8px;text-decoration:none;font-weight:600">🏨 Ver hoteles reales en ${d.name}</a>
-          <button class="btn-reserve" onclick="openBookingModal(${d.id})">Enviar solicitud de reserva</button>
+          <button class="btn-reserve">Reservar</button>
         </div>
       </div>
     </div>
@@ -1135,85 +1125,9 @@ async function doBooking() {
     alert.className = 'alert error';
     alert.textContent = 'Error al guardar: ' + error.message;
   } else {
-    alert.className = 'alert success';
-    alert.textContent = 'Reserva guardada. Abriendo el pago...';
-    await pagarConWebpay();
-  }
-}
-
-// ── PAGO WEBPAY ──
-async function pagarConWebpay() {
-  const name = document.getElementById('bookName').value.trim();
-  const phone = document.getElementById('bookPhone').value.trim();
-  const checkin = document.getElementById('bookCheckin').value;
-  const checkout = document.getElementById('bookCheckout').value;
-  const alert = document.getElementById('bookingAlert');
-  alert.className = 'alert';
-
-  if (!name || !phone || !checkin || !checkout) {
-    alert.className = 'alert error';
-    alert.textContent = 'Por favor completa nombre, teléfono y fechas antes de pagar.';
-    return;
-  }
-  if (checkin >= checkout) {
-    alert.className = 'alert error';
-    alert.textContent = 'La fecha de salida debe ser posterior a la llegada.';
-    return;
-  }
-  if (!currentDestination) {
-    alert.className = 'alert error';
-    alert.textContent = 'Selecciona un destino primero.';
-    return;
-  }
-
-  const nights = Math.ceil((new Date(checkout) - new Date(checkin)) / (1000*60*60*24));
-  const amount = nights * currentDestination.price;
-  const buyOrder = 'CHK-' + Date.now();
-  const sessionId = currentUser ? currentUser.id : 'guest-' + Date.now();
-
-  try {
-    const resp = await fetch(SUPABASE_FUNCTIONS_URL + '/webpay-create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'apikey': SUPABASE_KEY
-      },
-      body: JSON.stringify({
-        buy_order: buyOrder,
-        session_id: sessionId,
-        amount: amount,
-        destination: currentDestination.name,
-        guest_name: name,
-        guest_phone: phone,
-        checkin_date: checkin,
-        checkout_date: checkout
-      })
-    });
-
-    if (!resp.ok) {
-      throw new Error('Respuesta del servidor: ' + resp.status);
-    }
-
-    const data = await resp.json();
-    if (!data.url || !data.token) {
-      throw new Error('Respuesta de pago incompleta.');
-    }
-
-    // Redirige a Transbank Webpay mediante formulario POST
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = data.url;
-    const tokenInput = document.createElement('input');
-    tokenInput.type = 'hidden';
-    tokenInput.name = 'token_ws';
-    tokenInput.value = data.token;
-    form.appendChild(tokenInput);
-    document.body.appendChild(form);
-    form.submit();
-  } catch (err) {
-    alert.className = 'alert error';
-    alert.textContent = 'No se pudo iniciar el pago: ' + err.message;
+    closeModal('bookingModal');
+    showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
+    showPage('mybookings');
   }
 }
 
@@ -1348,6 +1262,15 @@ function showToast(msg, type) {
 </style>
 <div class="grid">
 <a class="cardx" href="hoteles-valdivia.html"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vista_de_Valdivia_(Puente_PdeV,_01).jpg?width=800" alt="Valdivia - ChekTravel"/><div><h3>🏨 Valdivia</h3><p>Guía completa: dónde alojarte y mejores hoteles 2026.</p><span class="btn">Ver guía de hoteles</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Valdivia%2C+Chile&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vista_de_Valdivia_(Puente_PdeV,_01).jpg?width=800" alt="Cabañas Valdivia - ChekTravel"/><div><h3>🏡 Cabañas Valdivia</h3><p>Cabañas rodeadas de bosque y ríos, junto al agua.</p><span class="btn">Ver cabañas</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Puerto+Montt%2C+Chile&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Montt_Chile.jpg?width=800" alt="Cabañas Puerto Montt - ChekTravel"/><div><h3>🏡 Cabañas Puerto Montt</h3><p>Vista al mar y volcanes del sur austral.</p><span class="btn">Ver cabañas</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Osorno%2C+Chile&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Osorno_volcano_Chile.jpg?width=800" alt="Cabañas Osorno - ChekTravel"/><div><h3>🏡 Cabañas Osorno</h3><p>Naturaleza, lagos y puerta a la Patagonia.</p><span class="btn">Ver cabañas</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Chiloe%2C+Chile&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Palafitos_de_Castro,_Chilo%C3%A9.jpg?width=800" alt="Cabañas Chiloé - ChekTravel"/><div><h3>🏡 Cabañas Chiloé</h3><p>Palafitos, mitología e islas del sur.</p><span class="btn">Ver cabañas</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Cancun%2C+Mexico&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Canc%C3%BAn_banner_Praia_Delfines.jpg?width=800" alt="Hoteles Cancún - ChekTravel"/><div><h3>🌴 Cancún y el Caribe</h3><p>Hoteles y resorts frente a playas turquesa.</p><span class="btn">Ver hoteles</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Paris%2C+France&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel_Wikimedia_Commons.jpg?width=800" alt="Hoteles París - ChekTravel"/><div><h3>🗼 París y Europa</h3><p>Hoteles en el corazón de las capitales europeas.</p><span class="btn">Ver hoteles</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Bariloche%2C+Argentina&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Buenos_Aires_-_Obelisco.jpg?width=800" alt="Hoteles Patagonia Argentina - ChekTravel"/><div><h3>🏔️ Patagonia Argentina</h3><p>Bariloche, lagos y montañas al otro lado de la cordillera.</p><span class="btn">Ver hoteles</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=Rome%2C+Italy&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Colosseo_2020.jpg?width=800" alt="Hoteles Roma - ChekTravel"/><div><h3>🏛️ Roma</h3><p>Hoteles cerca de la historia y el arte italiano.</p><span class="btn">Ver hoteles</span></div></a>
+<a class="cardx" href="https://www.expedia.com/Hotel-Search?destination=New+York%2C+USA&AID=12639039&PID=101809270&affcid=network.cj.101809270" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NYC_Downtown_Manhattan_Skyline_seen_from_Paulus_Hook_2019-12-20_IMG_7347_FRD_(cropped).jpg?width=800" alt="Hoteles Nueva York - ChekTravel"/><div><h3>🗽 Nueva York</h3><p>Hoteles en Manhattan y alrededores.</p><span class="btn">Ver hoteles</span></div></a>
 <a class="cardx" href="https://gyg.me/ZaBqhn4" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Puerto_Varas,_Chile_(10986508514).jpg?width=800" alt="Puerto Varas - ChekTravel"/><div><h3>Puerto Varas</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/BqG1atTp" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Buenos_Aires_-_Obelisco.jpg?width=800" alt="Buenos Aires - ChekTravel"/><div><h3>Buenos Aires</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/d0GLpeT4" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Christ_the_Redeemer_-_Cristo_Redentor.jpg?width=800" alt="Río de Janeiro - ChekTravel"/><div><h3>Río de Janeiro</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/fIvmbpX2" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Canc%C3%BAn_banner_Praia_Delfines.jpg?width=800" alt="Cancún - ChekTravel"/><div><h3>Cancún</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/AXNZuZee" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NYC_Downtown_Manhattan_Skyline_seen_from_Paulus_Hook_2019-12-20_IMG_7347_FRD_(cropped).jpg?width=800" alt="Nueva York - ChekTravel"/><div><h3>Nueva York</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/kXGRcc7c" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sagrada_Familia,_Barcelona_(P1170676).jpg?width=800" alt="Barcelona - ChekTravel"/><div><h3>Barcelona</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/MTvafoij" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Le_casino_de_Monte-Carlo.JPG?width=800" alt="Mónaco - ChekTravel"/><div><h3>Mónaco</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://gyg.me/4O0zuaJq" target="_blank"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Colosseo_2020.jpg?width=800" alt="Roma - ChekTravel"/><div><h3>Roma</h3><p>Descubre los mejores tours y experiencias.</p><span class="btn">Ver tours disponibles</span></div></a><a class="cardx" href="https://www.jdoqocy.com/click-101809270-17237017" target="_blank">
 <img src="https://commons.wikimedia.org/wiki/Special:FilePath/All_Nippon_Airways_Boeing_787-8_Dreamliner_JA801A_OKJ_in_flight.jpg?width=800" alt="Vuelos Air Serbia - ChekTravel"/>
 <div>
