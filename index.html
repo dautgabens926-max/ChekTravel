@@ -1130,9 +1130,9 @@ async function doBooking() {
     alert.className = 'alert error';
     alert.textContent = 'Error al guardar: ' + error.message;
   } else {
-    closeModal('bookingModal');
-    showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
-    showPage('mybookings');
+    alert.className = 'alert success';
+    alert.textContent = 'Reserva guardada. Abriendo el pago...';
+    await pagarConWebpay();
   }
 }
 
