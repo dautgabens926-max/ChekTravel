@@ -871,6 +871,13 @@ background-position:center!important;
 <button class="btn-primary" onclick="doBooking()">Confirmar y Pagar con Webpay</button>
 </div>
 </div>
+<!-- ══ MODAL: VIDEO ══ -->
+<div class="modal-overlay" id="videoModal">
+<div class="modal">
+<button class="modal-close" onclick="closeVideoModal()">×</button>
+<video id="videoPlayer" controls style="width:100%;border-radius:8px" playsinline></video>
+</div>
+</div>
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 <script>
@@ -888,7 +895,7 @@ const DESTINATIONS = [
   { id: 4, name: 'Puerto Montt', region: 'Los Lagos', type: 'Hotel', desc: 'Centro de conexión al sur austral de Chile.', price: 72000, emoji: '⚓', gradient: 'linear-gradient(135deg,#2A9D8F,#1A6B9A)' },
   { id: 5, name: 'Osorno', region: 'Los Lagos', type: 'Apartamento', desc: 'Ciudad tranquila, puerta de entrada a la Patagonia.', price: 55000, emoji: '🏡', gradient: 'linear-gradient(135deg,#6B7280,#4B5563)' },
   { id: 6, name: 'Frutillar', region: 'Los Lagos', type: 'Cabaña', desc: 'Arquitectura alemana y paisajes de lago incomparables.', price: 82000, emoji: '🎵', gradient: 'linear-gradient(135deg,#1A6B9A,#0D3B5E)' },
-  { id: 7, name: 'Cabañas Los Arrayanes - Ancud', region: 'Los Lagos', type: 'Cabaña', desc: 'Naturaleza y tranquilidad en Chiloé, a 8km de Ancud con vista al mar.', price: 60000, emoji: '🏝️', gradient: 'linear-gradient(135deg,#0D3B5E,#2A9D8F)', image: 'https://cabanasverificadas.cl/wp-content/uploads/2026/05/arriendo-de-cabana-en-chiloe-1.jpg' },
+  { id: 7, name: 'Cabañas Los Arrayanes - Ancud', region: 'Los Lagos', type: 'Cabaña', desc: 'Naturaleza y tranquilidad en Chiloé, a 8km de Ancud con vista al mar.', price: 60000, emoji: '🏝️', gradient: 'linear-gradient(135deg,#0D3B5E,#2A9D8F)', image: 'https://cabanasverificadas.cl/wp-content/uploads/2026/05/arriendo-de-cabana-en-chiloe-1.jpg', video: 'https://xgkclwjxdwfzbekihwiq.supabase.co/storage/v1/object/public/Image/VID-20260729-WA0002.mp4' },
 ];
 
 let currentUser = null;
@@ -950,7 +957,7 @@ function renderCards(containerId, items) {
   const container = document.getElementById(containerId);
   container.innerHTML = items.map(d => `
     <div class="card" onclick="openBookingModal(${d.id})">
-      <div class="card-img-placeholder" style="background:${d.gradient}${d.image ? `;background-image:url('${d.image}');background-size:cover;background-position:center` : ''}">${d.image ? '' : d.emoji}</div>
+      <div class="card-img-placeholder" style="position:relative;background:${d.gradient}${d.image ? `;background-image:url('${d.image}');background-size:cover;background-position:center` : ''}">${d.image ? '' : d.emoji}${d.video ? `<button onclick="event.stopPropagation();openVideoModal('${d.video}')" style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:0.8rem;cursor:pointer">▶ Ver video</button>` : ''}</div>
       <div class="card-body">
         <div class="card-tag">${d.type} · ${d.region}</div>
         <h3>${d.name}</h3>
@@ -982,6 +989,19 @@ function doSearch(e) {
 // ── MODALS ──
 function openModal(id) {
   document.getElementById(id).classList.add('open');
+}
+
+function openVideoModal(url) {
+  document.getElementById('videoPlayer').src = url;
+  openModal('videoModal');
+  document.getElementById('videoPlayer').play();
+}
+
+function closeVideoModal() {
+  const player = document.getElementById('videoPlayer');
+  player.pause();
+  player.src = '';
+  closeModal('videoModal');
 }
 
 function closeModal(id) {
