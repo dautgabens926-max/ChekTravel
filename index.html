@@ -868,7 +868,7 @@ background-position:center!important;
 <label>Notas adicionales</label>
 <textarea id="bookNotes" placeholder="Solicitudes especiales, llegada tardía, etc." rows="2"></textarea>
 </div>
-<button class="btn-primary" onclick="doBooking()">Confirmar Reserva</button>
+<button class="btn-primary" onclick="doBooking()">Confirmar y Pagar con Webpay</button>
 </div>
 </div>
 <!-- TOAST -->
@@ -901,6 +901,7 @@ window.onload = async () => {
   renderCards('allCards', DESTINATIONS);
   const { data: { session } } = await sb.auth.getSession();
   if (session?.user) handleUser(session.user);
+  await handleWebpayReturn();
   sb.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN') handleUser(session.user);
     if (event === 'SIGNED_OUT') handleLogout();
@@ -1103,7 +1104,7 @@ async function doBooking() {
   const nights = Math.ceil((new Date(checkout) - new Date(checkin)) / (1000*60*60*24));
   const total = nights * currentDestination.price;
 
-  const { error } = await sb.from('bookings').insert({
+  const { data, error } = await sb.from('bookings').insert({
     user_id: currentUser.id,
     user_email: currentUser.email,
     guest_name: name,
@@ -1120,16 +1121,89 @@ async function doBooking() {
     total_price: total,
     status: 'pending',
     created_at: new Date().toISOString()
-  });
+  }).select().single();
 
   if (error) {
     alert.className = 'alert error';
     alert.textContent = 'Error al guardar: ' + error.message;
-  } else {
+    return;
+  }
+
+  // ── Redirige a Webpay para pagar de inmediato ──
+  alert.className = 'alert';
+  alert.textContent = 'Conectando con Webpay...';
+  await startWebpayPayment(data);
+}
+
+// ── WEBPAY PAYMENT ──
+// ASUNCIÓN: el edge function 'webpay-create' espera { amount, buyOrder, sessionId, returnUrl }
+// y responde { url, token } (formato estándar Transbank Webpay Plus REST).
+// Si tu función usa otros nombres de campo, avísame y ajusto esto.
+async function startWebpayPayment(booking) {
+  try {
+    const buyOrder = 'CHK' + booking.id;
+    const sessionId = currentUser.id;
+    const returnUrl = window.location.origin + '/index.html?webpay_return=1&booking_id=' + booking.id;
+
+    const { data, error } = await sb.functions.invoke('webpay-create', {
+      body: {
+        amount: booking.total_price,
+        buyOrder: buyOrder,
+        sessionId: sessionId,
+        returnUrl: returnUrl
+      }
+    });
+
+    if (error || !data?.url || !data?.token) {
+      throw new Error(error?.message || 'Respuesta inválida de webpay-create');
+    }
+
+    // Transbank requiere redirigir con POST al url + token_ws
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = data.url;
+    const tokenInput = document.createElement('input');
+    tokenInput.type = 'hidden';
+    tokenInput.name = 'token_ws';
+    tokenInput.value = data.token;
+    form.appendChild(tokenInput);
+    document.body.appendChild(form);
+    form.submit();
+  } catch (err) {
+    document.getElementById('bookingAlert').className = 'alert error';
+    document.getElementById('bookingAlert').textContent = 'No se pudo iniciar el pago: ' + err.message + '. Tu reserva quedó guardada como pendiente, te contactaremos.';
     closeModal('bookingModal');
-    showToast('¡Reserva enviada! Te contactaremos pronto.', 'success');
+    showToast('Reserva guardada. Hubo un problema con el pago, te contactaremos.', '');
     showPage('mybookings');
   }
+}
+
+// ── WEBPAY RETURN HANDLING ──
+// Cuando Transbank redirige de vuelta con ?webpay_return=1&token_ws=...
+async function handleWebpayReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('webpay_return') !== '1') return;
+
+  const tokenWs = params.get('token_ws');
+  const bookingId = params.get('booking_id');
+  if (!tokenWs || !bookingId) return;
+
+  const { data, error } = await sb.functions.invoke('webpay-retorno', {
+    body: { token_ws: tokenWs }
+  });
+
+  // ASUNCIÓN: webpay-retorno responde { status: 'AUTHORIZED' | 'FAILED', ... }
+  if (!error && data?.status === 'AUTHORIZED') {
+    await sb.from('bookings').update({ status: 'paid' }).eq('id', bookingId);
+    showToast('¡Pago confirmado! Tu reserva está lista.', 'success');
+  } else {
+    await sb.from('bookings').update({ status: 'payment_failed' }).eq('id', bookingId);
+    showToast('El pago no se pudo confirmar. Te contactaremos.', 'error');
+  }
+
+  // Limpia los parámetros de la URL
+  window.history.replaceState({}, document.title, window.location.pathname);
+  showPage('mybookings');
 }
 
 // ── MY BOOKINGS ──
