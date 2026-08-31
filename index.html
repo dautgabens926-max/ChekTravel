@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="ChekTravel"/>
 <meta property="og:title" content="ChekTravel — Alojamientos y Viajes"/>
 <meta property="og:description" content="Encuentra los mejores hoteles, vuelos, tours y autos en el sur de Chile y destinos internacionales. Compara precios y reserva con confianza."/>
-<meta property="og:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/Vista_de_Valdivia_(Puente_PdeV,_01).jpg?width=1200"/>
+<meta property="og:image" content="https://cabanasverificadas.cl/wp-content/uploads/2026/05/arriendo-de-cabana-en-chiloe-1.jpg"/>
 <meta property="og:url" content="https://chektravel.com/"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -889,13 +889,13 @@ const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ── DESTINOS DATA ──
 const DESTINATIONS = [
+  { id: 7, name: 'Cabañas Los Arrayanes - Ancud', region: 'Los Lagos', type: 'Cabaña', desc: 'Naturaleza y tranquilidad en Chiloé, a 8km de Ancud con vista al mar. Reserva directa, sin comisión de terceros.', price: 60000, emoji: '🏝️', gradient: 'linear-gradient(135deg,#0D3B5E,#2A9D8F)', image: 'https://cabanasverificadas.cl/wp-content/uploads/2026/05/arriendo-de-cabana-en-chiloe-1.jpg', video: 'https://xgkclwjxdwfzbekihwiq.supabase.co/storage/v1/object/public/Image/VID-20260729-WA0002.mp4' },
   { id: 1, name: 'Puerto Varas', region: 'Los Lagos', type: 'Cabaña', desc: 'Junto al lago Llanquihue con vista al volcán Osorno.', price: 89000, emoji: '🏔️', gradient: 'linear-gradient(135deg,#1A6B9A,#2A9D8F)' },
   { id: 2, name: 'Chiloé', region: 'Los Lagos', type: 'Hospedaje', desc: 'Palafitos y naturaleza única en la isla grande.', price: 65000, emoji: '🌊', gradient: 'linear-gradient(135deg,#0D3B5E,#1A6B9A)' },
   { id: 3, name: 'Pucón', region: 'Araucanía', type: 'Cabaña', desc: 'Aventura y relax al pie del volcán Villarrica.', price: 95000, emoji: '🌋', gradient: 'linear-gradient(135deg,#E8714A,#c45a35)' },
   { id: 4, name: 'Puerto Montt', region: 'Los Lagos', type: 'Hotel', desc: 'Centro de conexión al sur austral de Chile.', price: 72000, emoji: '⚓', gradient: 'linear-gradient(135deg,#2A9D8F,#1A6B9A)' },
   { id: 5, name: 'Osorno', region: 'Los Lagos', type: 'Apartamento', desc: 'Ciudad tranquila, puerta de entrada a la Patagonia.', price: 55000, emoji: '🏡', gradient: 'linear-gradient(135deg,#6B7280,#4B5563)' },
   { id: 6, name: 'Frutillar', region: 'Los Lagos', type: 'Cabaña', desc: 'Arquitectura alemana y paisajes de lago incomparables.', price: 82000, emoji: '🎵', gradient: 'linear-gradient(135deg,#1A6B9A,#0D3B5E)' },
-  { id: 7, name: 'Cabañas Los Arrayanes - Ancud', region: 'Los Lagos', type: 'Cabaña', desc: 'Naturaleza y tranquilidad en Chiloé, a 8km de Ancud con vista al mar.', price: 60000, emoji: '🏝️', gradient: 'linear-gradient(135deg,#0D3B5E,#2A9D8F)', image: 'https://cabanasverificadas.cl/wp-content/uploads/2026/05/arriendo-de-cabana-en-chiloe-1.jpg', video: 'https://xgkclwjxdwfzbekihwiq.supabase.co/storage/v1/object/public/Image/VID-20260729-WA0002.mp4' },
 ];
 
 let currentUser = null;
